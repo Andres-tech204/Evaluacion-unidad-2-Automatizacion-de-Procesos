@@ -1,0 +1,10 @@
+# Ignora la carpeta de resultados de Maven
+/target/
+
+# Ignora archivos de configuración de IDEs comunes
+.idea/
+.vscode/
+*.iml
+
+# Ignora archivos de log
+*.log
