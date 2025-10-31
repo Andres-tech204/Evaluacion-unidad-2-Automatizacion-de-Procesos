@@ -1,0 +1,35 @@
+name: Pipeline de CI de Java con Maven
+
+on:
+  push:
+    branches: [ main ]
+
+jobs: 
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    #Paso 1: Descargar el codigo
+
+    - name: Descargar el codigo
+      uses: actions/checkout@v3
+
+
+    #Paso 2: Configurar ajva
+    - name: Configurar Java y Maven
+      uses: actions/setup-java@v3
+      with: 
+        java-version: '8'
+        distribution: 'temurin'
+
+    #Paso 3: Correr las pruebas con mvn test
+    - name: Compilar y correr pruebas con Maven
+      run: mvn test
+    #Paso 4: Publicar el reporte de pruebas
+    - name: Subir artefacto de reporte de pruebas
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: reporte-junit
+        path: target/surefire-reports/
+    
